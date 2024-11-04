@@ -1,7 +1,7 @@
 WITH source AS
     (
         SELECT
-            id AS customer_id,
+            id AS employee_id,
             company,
             last_name,
             first_name,
@@ -20,12 +20,12 @@ WITH source AS
             notes,
             attachments,
             CURRENT_TIMESTAMP() AS insertion_timestamp
-FROM {{ ref ('stg_customer') }}
+FROM {{ ref ('stg_employees') }}
 ),
 unique_source AS
 (
     SELECT *,
-    row_number() OVER(PARTITION BY customer_id) as row_number
+    row_number() OVER(PARTITION BY employee_id) as row_number
 FROM source       
 )
 SELECT *
