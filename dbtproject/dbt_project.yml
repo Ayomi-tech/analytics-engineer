@@ -31,7 +31,12 @@ clean-targets: # directories to be removed by `dbt clean`
 models:
   dbtproject:
     # Config indicated by + and applies to all files under models/example/
+    # Best practice is to have staging layers in VIEW
     staging:
       +enabled: true
-      +materialized: view
+      +materialized: table
       +schema: stg_northwind
+    warehouse:
+      +enabled: true
+      +materialized: table
+      +schema: dwh_northwind
